@@ -1,3 +1,24 @@
-# Exam 1 Reference
+Threads and Processes
+  data elements for each
+    location
+  Threads
+    Implementation details for user space vs kernal space
 
-Things added here can go into the cheet sheet.
+Mutex
+  When, where, why
+  
+Stack
+    ???
+    
+Deadlock
+  will lock, or not to lock?
+  
+Semaphores
+  how to use
+  implementation details
+      
+OS Level Code:
+  POSIX
+    mutexes, conditional waits, etc.
+  Basic
+    chmod, read, write, lseek, etc.

@@ -12,3 +12,8 @@ For Midterm 1, place all information in the exam1/ folder.  If any other compila
  - Make your changes/additions, and simply submit a pull request.
  - We'll essentially be operating in "Anarchy Mode", so please be courteous.  If you have a comment or concern, feel free to use GitHub's comment feature.
  - If you have an idea but aren't ready to include it, simply create an issue.
+
+## Preview:
+After each successful pull request, I'll put the currently generated document here for previewing: http://www.ece.iastate.edu/~bpeck/cpre308/exam1.pdf
+
+Note: If it goes over one page, only the first page will be used.

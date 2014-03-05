@@ -1,4 +1,4 @@
-Threads and Processes
+### Threads and Processes
 
 Per process items: Address space, Global variables, Open files, Child processes, Pending alarms, Signals and signal handlers, Accounting information
 Per thread items: Program counter, Registers, Stack, State
@@ -6,6 +6,16 @@ Per thread items: Program counter, Registers, Stack, State
     location
   Threads
     Implementation details for user space vs kernal space
+
+#### Memory Layout
+
+|               |Top        |          |         |          |    Bottom|
+|---------------|-----------|----------|---------|----------|----------|
+|               | **Stack** | **Heap** | **BSS** | **Data** | **Text** |
+| **Contains**  | Local vars, function params | Dynamic vars (malloc) | Uninitialized static/global vars | initialized static/global vars | program code |
+| **Grows**     | Down       |  Up     | N/A     | N/A      | N/A      |
+
+
 
 Mutex
   When, where, why

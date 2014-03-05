@@ -1,11 +1,23 @@
 ### Threads and Processes
 
 Per process items: Address space, Global variables, Open files, Child processes, Pending alarms, Signals and signal handlers, Accounting information
+
 Per thread items: Program counter, Registers, Stack, State
-  
-    location
-  Threads
-    Implementation details for user space vs kernal space
+
+#### Threads
+* Kernel space:
+  * Bad:
+    * Thread operations use system calls (expensive)
+  * Good:
+    * Can use addtl. hardware
+    * System call will only block individual threads
+* User space:
+  * Bad:
+    * System calls block all threads
+    * Can't use addtl. hardware
+  * Good:
+    * OS doesn't have to know about threads
+    * Thread operations are *fast*
 
 #### Memory Layout
 
@@ -14,8 +26,6 @@ Per thread items: Program counter, Registers, Stack, State
 |               | **Stack** | **Heap** | **BSS** | **Data** | **Text** |
 | **Contains**  | Local vars, function params | Dynamic vars (malloc) | Uninitialized static/global vars | initialized static/global vars | program code |
 | **Grows**     | Down       |  Up     | N/A     | N/A      | N/A      |
-
-
 
 Mutex
   When, where, why

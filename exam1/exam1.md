@@ -13,8 +13,17 @@ Mutex
 Stack
     ???
     
-Deadlock
+### Deadlock
   will lock, or not to lock?
+
+  *Definition*: A set of processes is deadlocked if each process in the set is waiting for an event that only another process in the set can cause.
+
+#### Four conditions:
+
+  1. Mutual exclusion
+  2. Hold and wait condition
+  3. No preemption condition
+  4. Circular wait condition
   
 Semaphores
   how to use

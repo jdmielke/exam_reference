@@ -4,25 +4,24 @@
 
 #### Threads
 * Kernel space:
-  * Bad:
-    * Thread operations use system calls (expensive)
-  * Good:
-    * Can use addtl. hardware
-    * System call will only block individual threads
+    * Bad:
+        * Thread operations use system calls (expensive)
+    * Good:
+        * Can use addtl. hardware
+        * System call will only block individual threads
 * User space:
-  * Bad:
-    * System calls block all threads
-    * Can't use addtl. hardware
-  * Good:
-    * OS doesn't have to know about threads
-    * Thread operations are *fast*
+    * Bad:
+        * System calls block all threads
+        * Can't use addtl. hardware
+    * Good:
+        * OS doesn't have to know about threads
+        * Thread operations are *fast*
 
 #### Memory Layout
-|               |Top        |          |         |          |    Bottom|
-|---------------|-----------|----------|---------|----------|----------|
-|               | **Stack** | **Heap** | **BSS** | **Data** | **Text** |
-| **Contains**  | Local vars| Dynamic (malloc)  |Uninitialized globals| Initialized globals|  code |
-| **Grows**     | Down       |  Up     | N/A     | N/A      | N/A      |
+Top        |          |         |          |    Bottom|
+-----------|----------|---------|----------|----------|
+ **Stack** | **Heap** | **BSS** | **Data** | **Text** |
+ Local vars| Dynamic (malloc)  |Uninitialized globals| Initialized globals|  code |
 
 ### Deadlock
   * A set of processes is deadlocked if each process in the set is waiting for an event that only another process in the set can cause.
@@ -41,10 +40,6 @@
     * *Attack hold and wait:* Require process to request resources before starting (might not have enough resources to run)
     * *Attack no preemption:* takes resources that are currently being used, from process that are using them.
     * *Attack circular wait:* use a resource graph
-  
-Semaphores
-  how to use
-  implementation details
       
 OS Level Code:
   POSIX

@@ -1,7 +1,6 @@
 ### Threads and Processes
-Per process items: Address space, Global variables, Open files, Child processes, Pending alarms, Signals and handlers
-
-Per thread items: Program counter, Registers, Stack, State
+  * Per process items: Address space, Global variables, Open files, Child processes, Pending alarms, Signals and handlers
+  * Per thread items: Program counter, Registers, Stack, State
 
 #### Threads
 * Kernel space:
@@ -22,17 +21,14 @@ Per thread items: Program counter, Registers, Stack, State
 |               |Top        |          |         |          |    Bottom|
 |---------------|-----------|----------|---------|----------|----------|
 |               | **Stack** | **Heap** | **BSS** | **Data** | **Text** |
-| **Contains**  | Local vars, function params | Dynamic vars (malloc) | Uninitialized static/global vars | initialized static/global vars | program code |
+| **Contains**  | Local vars| Dynamic (malloc)  |Uninitialized globals| Initialized globals|  code |
 | **Grows**     | Down       |  Up     | N/A     | N/A      | N/A      |
 
 ### Deadlock
-  *Definition*: A set of processes is deadlocked if each process in the set is waiting for an event that only another process in the set can cause.
+  * A set of processes is deadlocked if each process in the set is waiting for an event that only another process in the set can cause.
 
 #### Four conditions:
-  1. Mutual exclusion
-  2. Hold and wait condition
-  3. No preemption condition
-  4. Circular wait condition
+  * Mutual exclusion, hold and wait, no preemption, and circular wait
 
 #### Four Solutions:
   1. **Ostrich Algorithm** - Ignore the problem

@@ -6,7 +6,7 @@ Students are free to add any information they desire, so long as the output fits
 
 I'll be using pandoc to convert the file to a PDF, unless another solution is provided (with a makefile).
 
-For Midterm 1, place all information in the exam1/ folder.  If any other compilation instruction are needed, use a README in that folder.
+For Midterm 2, place all information in the exam2/ folder.  If any other compilation instruction are needed, use a README in that folder.
 
 ## Submission
  - Make your changes/additions, and simply submit a pull request.
@@ -14,6 +14,6 @@ For Midterm 1, place all information in the exam1/ folder.  If any other compila
  - If you have an idea but aren't ready to include it, simply create an issue.
 
 ## Preview:
-After each successful pull request, I'll put the currently generated document here for previewing: http://www.ece.iastate.edu/~bpeck/cpre308/exam1.pdf
+After each successful pull request, I'll put the currently generated document here for previewing: http://www.ece.iastate.edu/~bpeck/cpre308/exam2.pdf
 
 Note: If it goes over one page, only the first page will be used.

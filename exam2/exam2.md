@@ -37,7 +37,7 @@
  * **_Copy on Write_** Processes given pointer to same resource | When process makes changes, a local copy is then made to use
 
 ##### TLB: Associative Register | Small cache of recently used mappings | Improves translation speed
- * **_Average Access Time_** = 2m + ε - αm, where α = TLB hit ratio, m = memory access time in ms and ε = TLB search time in ms
+ * **_Average Access Time_** = $2m + \epsilon - \alpha m$, where $\alpha$ = TLB hit ratio, $m$ = memory access time in ms and $\epsilon$ = TLB search time in ms
 
 ##### Translation Process: Search TLB | If TLB Miss: Search Page Table | If Page Fault: Load from disk
 

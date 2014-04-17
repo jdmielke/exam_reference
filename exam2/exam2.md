@@ -18,18 +18,18 @@
     * **_Structuring_** **Paging** fixed-size pages (_internal frag_) | **Segmentation** variable-size segs (_external frag_) | Hybrid
     * **_TODO_** **_Generate Physical Address_** 
  * **Memory Management Unit (MMU):** Maps address space onto physical memory and 2ndary | Page faults if not in memory
- * **Page Table:** Mappings of virtual addresses to physical addresses | **_Conversions_** 1 KB = 2<sup>10</sup> bytes | 1 MB = 2<sup>20</sup> bytes
+ * **Page Table:** Mappings of virtual addresses to physical addresses | **_Conversions_** 1 KB = 2$^{10}$ bytes | 1 MB = 2$^{20}$ bytes
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
     * **_TODO_** Determine parameters (size, offset, page size, etc.)
     * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(space)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
     * **_Types_** | **Page Table** Popular | **TLB** Performance | **Inverted** Large AS | **Multi Level** Large AS, bad page access time
-    * **_Location_** **Registers** Fast trans, small tables, expensive switching | **Memory** Slow trans, large tables, pointer for location and size, quick switching
+    * **_Location_** **Registers** Fast trans, small tables, expensive switch | **Memory** Slow trans, large tables, pointer for location & size, quick switch
     * **_vfork()_** Parent AS not copied | Parent AS given to child | Parent suspended until child returns AS | Child does exec
     * **_Copy on Write_** Processes given pointer to same resource | When changed, a local copy is then made to use
  * **TLB** Associative Register | Small cache of recently used mappings | Improves translation speed
     * **_Average Access Time_** = $2m + \epsilon - \alpha m$, where $\alpha$ = TLB hit ratio, $m$ = memory access time in ms and $\epsilon$ = TLB search time in ms
  * **Translation Process:** Search TLB | If TLB Miss: Search Page Table | If Page Fault: Load from disk
- * **Memory Management:** First fit: Quick allocation, high fragmentation | Best fit: Low fragmentation | Worst fit: Fast allocation, high fragmentation
+ * **Page Memory Alloc:** First fit: Quick alloc, high frag | Best fit: Low frag | Worst fit: Fast alloc, high frag
  * **Page Replacement Algos:**
     * **_FIFO_** Easy to implement | Not a good policy
     * **_NRU_** _Classes_: _0_:R=0,M=0 _1_:R=0,M=1 _2_:R=1,M=0 _3_:R=1,M=1 | Remove random from lowest class | R cleared periodically

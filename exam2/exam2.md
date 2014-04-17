@@ -11,7 +11,7 @@
     * **_Real-Time_** Provide time guarantees | **Soft** Can reschedule (mp3) | **Hard** Is lost if missed (Air-traffic controller)
     * **_Exponential Averaging_** guess = a(new_data) + (1 - a)(previous_guess), where a is weight given to new data
  * **Algorithm Goals:** Impossible to satisfy all at the same time
-    * **_Turnaround_** *t<sub>end</sub> - t<sub>queued</sub>* **_Response_** *t<sub>response</sub> - t<sub>queued</sub>* **_Waiting_** *t<sub>start</sub> - t<sub>queued</sub>* **_Throughput_** *completed per t<sub>unit</sub>*
+    * **_Turnaround_** *t$_{end}$ - t$_{queued}$* **_Response_** *t$_{response}$ - t$_{queued}$* **_Waiting_** *t$_{start}$ - t$_{queued}$* **_Throughput_** *completed per t$_{unit}$*
  * **Virtual Memory** Each process own set of addresses that the program generates at run time
     * **_Goals_** Protect processes from others | Protect OS from user processes | Provide efficient management of storage
     * **_Advantages_** Program can be larger than physical memory and run faster as long as pages are in memory
@@ -21,15 +21,15 @@
  * **Page Table:** Mappings of virtual addresses to physical addresses | **_Conversions_** 1 KB = 2<sup>10</sup> bytes | 1 MB = 2<sup>20</sup> bytes
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
     * **_TODO_** Determine parameters (size, offset, page size, etc.)
-    * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2<sup>32</sup>(space)/2<sup>13</sup>(pages) = 2<sup>19</sup> entries * 2<sup>2</sup>(entry) = 2<sup>21</sup> bytes
+    * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(space)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
     * **_Types_** | **Page Table** Popular | **TLB** Performance | **Inverted** Large AS | **Multi Level** Large AS, bad page access time
-    * **_Location_** **Registers** <sub>Fast trans, small tables, expensive switching </sub> | <sub>**Memory** Slow trans, large tables, pointer for location and size, quick switching</sub>
+    * **_Location_** **Registers** Fast trans, small tables, expensive switching | **Memory** Slow trans, large tables, pointer for location and size, quick switching
     * **_vfork()_** Parent AS not copied | Parent AS given to child | Parent suspended until child returns AS | Child does exec
     * **_Copy on Write_** Processes given pointer to same resource | When changed, a local copy is then made to use
  * **TLB** Associative Register | Small cache of recently used mappings | Improves translation speed
     * **_Average Access Time_** = $2m + \epsilon - \alpha m$, where $\alpha$ = TLB hit ratio, $m$ = memory access time in ms and $\epsilon$ = TLB search time in ms
  * **Translation Process:** Search TLB | If TLB Miss: Search Page Table | If Page Fault: Load from disk
- * **Memory Management:** First fit: **_TODO_** | Best fit: **_TODO_** | Worst fit: **_TODO_**
+ * **Memory Management:** First fit: Quick allocation, high fragmentation | Best fit: Low fragmentation | Worst fit: Fast allocation, high fragmentation
  * **Page Replacement Algos:**
     * **_FIFO_** Easy to implement | Not a good policy
     * **_NRU_** _Classes_: _0_:R=0,M=0 _1_:R=0,M=1 _2_:R=1,M=0 _3_:R=1,M=1 | Remove random from lowest class | R cleared periodically
@@ -54,20 +54,18 @@
  * **Block Placement Schemes:**
     * **_Cont Alloc_** Sequential alloc | *Pros* fast read, easy tracking, #1 for read-only | *Cons* frags with dels, file growth expensive
     * **_Linked List_** *Pro* Sequential access is fast | *Con* Random access is slow
-    * **_TODO_** **_FAT_** One entry per physical disk block | Can be in main memory
-    * **_TODO_** **_UNIX Version_** 
- * **_TODO_** **Shared Files:**
- * **_TODO_** **Buffer Caches:** Read disk into memory until no longer needed
+    * **_FAT_** One entry per physical disk block | Can be in main memory | Simple and robust
+    * **_UNIX Version inodes_** node | owner & group | timestamps | size |  Direct blocks | Single indirect | Double indirect | Triple indirect
+ * **Shared Files:** **_Hard Links:_** Both files point to same inode| **_Symbolic Links:_** Files point to different inodes
+    * **
+ * **Buffer Caches:** Disk keeps reading sectors ahead of requested sector and saves to buffer cache, in case the OS requests them later
     * **_Write-back Cache_** Write to cache and return; write to disk is done later | Most efficient
     * **_Write-through Cache_** Write to cache, schedule a write to disk and return | Most reliable
     * **_Exceptional Cases_** Write to cache, do a synchronous (blocking) write to disk, and return
-    * **_Replacement Algos_**
- * **_TODO_** **Disk Scheduling:**
-
- * **Sample code:**
-
-```c
-int main() {
-    write(1, buf, sizeof(buf));
-}
-```
+    * **_Replacement Algos_** LRU | Sorted listed by time of use
+ * **Disk Scheduling:** **_Goals:_** Trade-off between throughput and response time
+    * **_FCFS_** **Pro:** Quick response time | **Cons:** No regard for throughput and head may move almost randomly across disk surface
+    * **_SSTF_** Closest to current head position | **Pro:** Minimized head movement time | **Con:** Starvation of far reads
+    * **_SCAN_** Sweep from outer to inner and back | Selects those that are in path | Lower movement time that FCFS | Fairer than SSTF
+    * **_LOOK_** SCAN but will change direction if no waiting requests beyond current cylinder
+    * **_C-SCAN_** SCAN but from innter to outer and back to inner without satisfying any requests

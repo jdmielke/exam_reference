@@ -6,11 +6,12 @@
 \usepackage{setspace}
 \setstretch{0.8}
 
-%% Trying a more condensed font style
-\usepackage[light,condensed,math]{iwona}
-
 %% Smaller text size
-\fontsize{4mm}{5mm}\selectfont
+\scriptsize
+
+%% Decrease space between bullets
+\usepackage{enumitem}
+\setlist{nolistsep}
 
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}

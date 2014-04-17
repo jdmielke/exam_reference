@@ -1,13 +1,10 @@
-\documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$lang$,$endif$$if(papersize)$$papersize$,$endif$]{$documentclass$}
+\documentclass[a4wide,8pt]{extarticle}
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
 
 %% Set line spacing in LaTeX
 \usepackage{setspace}
 \setstretch{0.8}
-
-%% Smaller text size
-\scriptsize
 
 %% Decrease space between bullets
 \usepackage{enumitem}

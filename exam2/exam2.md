@@ -16,19 +16,18 @@
     * **_Goals_** Protect processes from others | Protect OS from user processes | Provide efficient management of storage
     * **_Advantages_** Program can be larger than physical memory and run faster as long as pages are in memory
     * **_Structuring_** **Paging** fixed-size pages (_internal frag_) | **Segmentation** variable-size segs (_external frag_) | Hybrid
-    * **_TODO_** **_Generate Physical Address_** 
  * **Memory Management Unit (MMU):** Maps address space onto physical memory and 2ndary | Page faults if not in memory
  * **Page Table:** Mappings of virtual addresses to physical addresses | **_Conversions_** 1 KB = 2$^{10}$ bytes | 1 MB = 2$^{20}$ bytes
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
-    * **_TODO_** Determine parameters (size, offset, page size, etc.)
-    * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(space)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
+    * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(addresses)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
+    * **_Translation Process:_** Find virtual page frame and virtual page offset | Map to physical page frame | Add Add offset to physical location in referenced physical page frame
+    * e.g. 4KB pages, virtual address 5000: virtual page frame = $\frac{5000}{2^12} = 1$ | virtual page offset = $5000\bmod 2^12$ = 904 | Mapped to frame 2(e.g.) | Frame 2 holds location 4(e.g.) | Location = $2^2 \times 2^12$
     * **_Types_** | **Page Table** Popular | **TLB** Performance | **Inverted** Large AS | **Multi Level** Large AS, bad page access time
     * **_Location_** **Registers** Fast trans, small tables, expensive switch | **Memory** Slow trans, large tables, pointer for location & size, quick switch
     * **_vfork()_** Parent AS not copied | Parent AS given to child | Parent suspended until child returns AS | Child does exec
     * **_Copy on Write_** Processes given pointer to same resource | When changed, a local copy is then made to use
  * **TLB** Associative Register | Small cache of recently used mappings | Improves translation speed
     * **_Average Access Time_** = $2m + \epsilon - \alpha m$, where $\alpha$ = TLB hit ratio, $m$ = memory access time in ms and $\epsilon$ = TLB search time in ms
- * **Translation Process:** Search TLB | If TLB Miss: Search Page Table | If Page Fault: Load from disk
  * **Page Memory Alloc:** First fit: Quick alloc, high frag | Best fit: Low frag | Worst fit: Fast alloc, high frag
  * **Page Replacement Algos:**
     * **_FIFO_** Easy to implement | Not a good policy
@@ -42,10 +41,10 @@
     * **_Optimal_** Evict page used furthest in the future
  * **Page Frame Allocation: Global:** All processes complete for pages | **Local** Equal or Proportional allocation
     * **_Thrasing_** A program causing page faults every few instructions
-    * **_Working Set of a Process_** Reduces thrashing | Set of references pages in the last k memory references
+    * **_Working Set of a Process_** Reduces thrashing | Set of referenced pages in the last k memory references
+    * *e.g.* Find k-references at $t = 6$ with $k = 3$ | t: 0 1 2 3 4 5 6 7 8 9 and page #: 1 1 2 2 1 3 1 1 4 5 | $w(3, 6) = {1,3} |w(3,6)| = 2$
  * **Files: Permissions:** rwx(**user**)rwx(**groups**)rwx(**others**)
     * **_Opening_** int open(const char *pathname, int flags, mode t mode); | returns file descriptor | Use dup to open same file
-    * **_Flags_** *read only* (O_RDONLY), *write only* (O_WRONLY), *read and write* (O_RDWR)
     * **_Reading_** ssize t read(int fildes, void *buf, size t count); | returns # of bytes transferred | 0 for end | -1 for error
     * **_Writing_** ssize t write(int fildes, const void *buf, size t count); | returns # of bytes transferred | -1 for error
     * **_filedes_** *standard input* (0), *standard output* (1), *standard error output* (2)

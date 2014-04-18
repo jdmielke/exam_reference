@@ -21,7 +21,7 @@
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
     * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(addresses)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
     * **_Translation Process:_** Find virtual page frame and virtual page offset | Map to physical page frame | Add Add offset to physical location in referenced physical page frame
-    * e.g. 4KB pages, virtual address 5000: virtual page frame = $\frac{5000}{2^12} = 1$ | virtual page offset = $5000\bmod 2^12$ = 904 | Mapped to frame 2(e.g.) | Frame 2 holds location 4(e.g.) | Location = $2^2 \times 2^12$
+    * e.g. 4KB pages, virtual address 5000: virtual page frame = $\frac{5000}{2^{12}} = 1$ | virtual page offset = $5000\bmod 2^{12}$ = 904 | Mapped to frame 2(e.g.) | Frame 2 holds location 4(e.g.) | Location = $2^2 \times 2^{12}$
     * **_Types_** | **Page Table** Popular | **TLB** Performance | **Inverted** Large AS | **Multi Level** Large AS, bad page access time
     * **_Location_** **Registers** Fast trans, small tables, expensive switch | **Memory** Slow trans, large tables, pointer for location & size, quick switch
     * **_vfork()_** Parent AS not copied | Parent AS given to child | Parent suspended until child returns AS | Child does exec
@@ -42,7 +42,7 @@
  * **Page Frame Allocation: Global:** All processes complete for pages | **Local** Equal or Proportional allocation
     * **_Thrasing_** A program causing page faults every few instructions
     * **_Working Set of a Process_** Reduces thrashing | Set of referenced pages in the last k memory references
-    * *e.g.* Find k-references at $t = 6$ with $k = 3$ | t: 0 1 2 3 4 5 6 7 8 9 and page #: 1 1 2 2 1 3 1 1 4 5 | $w(3, 6) = {1,3} |w(3,6)| = 2$
+    * *e.g.* Find k-references at $t = 6$ with $k = 3$ | t: 0 1 2 3 4 5 6 7 8 9 and page #: 1 1 2 2 1 3 1 1 4 5 | $w(3, 6) = \{1,3\} |w(3,6)| = 2$
  * **Files: Permissions:** rwx(**user**)rwx(**groups**)rwx(**others**)
     * **_Opening_** int open(const char *pathname, int flags, mode t mode); | returns file descriptor | Use dup to open same file
     * **_Reading_** ssize t read(int fildes, void *buf, size t count); | returns # of bytes transferred | 0 for end | -1 for error

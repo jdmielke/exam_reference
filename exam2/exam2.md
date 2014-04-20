@@ -1,4 +1,3 @@
- * **Running Process States:** Running | Ready | Blocked
  * **Scheduling:** Minimize: response time and switch overhead | Maximize: throughput and CPU utilization | Be fair
     * **_FCFS_** Non-preemptive | Schedule first in queue | **Pro** Easy to implement | **Con** Slow for mix of short/long jobs
     * **_SJF_** Non-preemptive | As the name says, schedule shortest job in queue to run | **Pro** Easy to implement
@@ -12,8 +11,7 @@
     * **_Exponential Averaging_** guess = a(new_data) + (1 - a)(previous_guess), where a is weight given to new data
  * **Algorithm Goals:** Impossible to satisfy all at the same time
     * **_Turnaround_** *t$_{end}$ - t$_{queued}$* **_Response_** *t$_{response}$ - t$_{queued}$* **_Waiting_** *t$_{start}$ - t$_{queued}$* **_Throughput_** *completed per t$_{unit}$*
- * **Virtual Memory** Each process own set of addresses that the program generates at run time
-    * **_Goals_** Protect processes from others | Protect OS from user processes | Provide efficient management of storage
+ * **Virtual Memory** Each process has own AS at run time | **_Goals:_** Protection and Management
     * **_Advantages_** Program can be larger than physical memory and run faster as long as pages are in memory
     * **_Structuring_** **Paging** fixed-size pages (_internal frag_) | **Segmentation** variable-size segs (_external frag_) | Hybrid
  * **Memory Management Unit (MMU):** Maps address space onto physical memory and 2ndary | Page faults if not in memory
@@ -21,14 +19,14 @@
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
     * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(addresses)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
     * **_Translation Process:_** Find virtual page frame and virtual page offset | Map to physical page frame | Add Add offset to physical location in referenced physical page frame
-    * e.g. 4KB pages, virtual address 5000: virtual page frame = $\frac{5000}{2^{12}} = 1$ | virtual page offset = $5000\bmod 2^{12}$ = 904 | Mapped to frame 2(e.g.) | Frame 2 holds location 4(e.g.) | Location = $2^2 \times 2^{12}$
+    * *e.g.* 4KB pages, virtual address 5000: virtual page frame = $\frac{5000}{2^{12}} = 1$ | virtual page offset = $5000\bmod 2^{12}$ = 904 | Mapped to frame 2(e.g.) | Frame 2 holds location 4(e.g.) | Location = $2^2 \times 2^{12}$
+    * *e.g.* With 48-bit VA and 32-bit PA, how many entries if pages are 8 KB? | $\frac{2^{48}}{2^{13}} = 2^{35}$ entries
+    * *e.g.* 32-bit v_address using 2-level page table. VA is split into a 9-bit top field and 11-bit 2nd field. Find page size and page entries | Page size = $\frac{2^{32}}{2^{20}} = 2^{12} = 4KB$ | Entries = $2^{20}$
     * **_Types_** | **Page Table** Popular | **TLB** Performance | **Inverted** Large AS | **Multi Level** Large AS, bad page access time
     * **_Location_** **Registers** Fast trans, small tables, expensive switch | **Memory** Slow trans, large tables, pointer for location & size, quick switch
-    * **_vfork()_** Parent AS not copied | Parent AS given to child | Parent suspended until child returns AS | Child does exec
     * **_Copy on Write_** Processes given pointer to same resource | When changed, a local copy is then made to use
  * **TLB** Associative Register | Small cache of recently used mappings | Improves translation speed
     * **_Average Access Time_** = $2m + \epsilon - \alpha m$, where $\alpha$ = TLB hit ratio, $m$ = memory access time in ms and $\epsilon$ = TLB search time in ms
- * **Page Memory Alloc:** First fit: Quick alloc, high frag | Best fit: Low frag | Worst fit: Fast alloc, high frag
  * **Page Replacement Algos:**
     * **_FIFO_** Easy to implement | Not a good policy
     * **_NRU_** _Classes_: _0_:R=0,M=0 _1_:R=0,M=1 _2_:R=1,M=0 _3_:R=1,M=1 | Remove random from lowest class | R cleared periodically
@@ -44,18 +42,15 @@
     * **_Working Set of a Process_** Reduces thrashing | Set of referenced pages in the last k memory references
     * *e.g.* Find k-references at $t = 6$ with $k = 3$ | t: 0 1 2 3 4 5 6 7 8 9 and page #: 1 1 2 2 1 3 1 1 4 5 | $w(3, 6) = \{1,3\} |w(3,6)| = 2$
  * **Files: Permissions:** rwx(**user**)rwx(**groups**)rwx(**others**)
-    * **_Opening_** int open(const char *pathname, int flags, mode t mode); | returns file descriptor | Use dup to open same file
-    * **_Reading_** ssize t read(int fildes, void *buf, size t count); | returns # of bytes transferred | 0 for end | -1 for error
-    * **_Writing_** ssize t write(int fildes, const void *buf, size t count); | returns # of bytes transferred | -1 for error
-    * **_filedes_** *standard input* (0), *standard output* (1), *standard error output* (2)
-    * **_Seeking_** off t lseek(int fildes, off t offset, int whence); | returns updated value of file pointer relative to beg
+    * **_Opening_** Ret file descrip**_Reading_** Ret # bytes read | **_Writing_** Returns # of bytes written | **_Seeking_** Returns new file pointer
     * **_whence_** *offset* (SEEK_SET), *current + offset* (SEEK_CUR), *size of file* (SEEK_END) 
  * **Block Placement Schemes:**
     * **_Cont Alloc_** Sequential alloc | *Pros* fast read, easy tracking, #1 for read-only | *Cons* frags with dels, file growth expensive
     * **_Linked List_** *Pro* Sequential access is fast | *Con* Random access is slow
     * **_FAT_** One entry per physical disk block | Can be in main memory | Simple and robust
-    * **_UNIX Version inodes_** node | owner & group | timestamps | size |  Direct blocks | Single indirect | Double indirect | Triple indirect
- * **Shared Files:** **_Hard Links:_** Both files point to same inode| **_Symbolic Links:_** Files point to different inodes
+    * **_UNIX Version inodes_** i-nodes | owner & group | timestamps | size |  Direct blocks | Single indirect | Double indirect | Triple indirect
+    * *e.g.* System has 1 KB blocks and 4-bytes addresses. What is max file size? | entires = $\frac{2^{10}}{2^2} = 2^8$ | direct = 10 ptrs, single = 256 ptrs, double = 256$^2$ ptrs and triple = 256$^3$ ptrs which sum to 16.06 GB
+ * **Shared Files:** **_Hard Links:_** Both files point to same inode | **_Symbolic Links:_** Files point to different inodes
     * **
  * **Buffer Caches:** Disk keeps reading sectors ahead of requested sector and saves to buffer cache, in case the OS requests them later
     * **_Write-back Cache_** Write to cache and return; write to disk is done later | Most efficient
@@ -68,3 +63,19 @@
     * **_SCAN_** Sweep from outer to inner and back | Selects those that are in path | Lower movement time that FCFS | Fairer than SSTF
     * **_LOOK_** SCAN but will change direction if no waiting requests beyond current cylinder
     * **_C-SCAN_** SCAN but from innter to outer and back to inner without satisfying any requests
+    * **_Page Replacement e.g._** Which page will be replaced by: a) NRU? b) FIFO? c) LRU? d) 2nd Chance? Given:
+    \begin{multicols}{2}
+    \begin{tabular}{ l c r}
+    Page & Loaded & Last ref. & R & M \\
+    0 & 126 & 280 & 1 & 0 \\
+    1 & 230 & 265 & 0 & 1 \\
+    2 & 140 & 270 & 0 & 0 \\
+    3 & 110 & 285 & 1 & 1 \\
+    \end{tabular}
+    \columnbreak
+    * NRU = Page 2
+    * FIFO = Page 3
+    * LRU = Page 1
+    * Second Chance = Page 2
+    \end{multicols}
+    

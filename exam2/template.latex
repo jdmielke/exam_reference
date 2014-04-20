@@ -11,7 +11,7 @@
 \setlist{nolistsep}
 
 %% Use columns
-\usepackage{multicols}
+\usepackage{multicol}
 
 \usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}

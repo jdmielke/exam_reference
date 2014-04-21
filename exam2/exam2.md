@@ -64,7 +64,7 @@
     * **_LOOK_** SCAN but will change direction if no waiting requests beyond current cylinder
     * **_C-SCAN_** SCAN but from innter to outer and back to inner without satisfying any requests
     * **_Page Replacement e.g._** Which page will be replaced by: a) NRU = 2b) FIFO = 3 c) LRU = 1 d) 2nd Chance = 2 Given:
-\begin{table}
+\begin{table}[h]
 \begin{tabular}{c c c c c}
 Page & Loaded & Last ref. & R & M \\
 0 & 126 & 280 & 1 & 0 \\

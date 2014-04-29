@@ -6,12 +6,15 @@ Students are free to add any information they desire, so long as the output fits
 
 I'll be using pandoc to convert the file to a PDF, unless another solution is provided (with a makefile).
 
-For Midterm 2, place all information in the exam2/ folder.  If any other compilation instruction are needed, use a README in that folder.
+For the final exam, place all information in the final/ folder.  If any other compilation instruction are needed, use a README in that folder.
 
 ## Submission
  - Make your changes/additions, and simply submit a pull request.
  - We'll essentially be operating in "Anarchy Mode", so please be courteous.  If you have a comment or concern, feel free to use GitHub's comment feature.
  - If you have an idea but aren't ready to include it, simply create an issue.
+
+### Deadline:
+I will accept pull requests until Tuesday at noon.  This gives me a chance to print it, and you a chance to review a finalized version before the exam on Wednesday.
 
 ## Preview:
 After each successful pull request, I'll put the currently generated document here for previewing: http://www.ece.iastate.edu/~bpeck/cpre308/final.pdf

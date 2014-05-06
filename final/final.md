@@ -1,4 +1,3 @@
-* **Threads and Processes:** 
    * Per process items: Address space, Global variables, Open files, Child processes, Pending alarms, Signals and handlers
    * Per thread items: Program counter, Registers, Stack, State
 * **Threads:**
@@ -31,7 +30,7 @@
  * **Virtual Memory** Each process has own AS at run time | **_Goals:_** Protection and Management
     * **_Advantages_** Program can be larger than physical memory and run faster as long as pages are in memory
     * **_Structuring_** **Paging** fixed-size pages (_internal frag_) | **Segmentation** variable-size segs (_external frag_) | Hybrid
- * **Memory Management Unit (MMU):** Maps address space onto physical memory and 2ndary | Page faults if not in memory
+ * **Memory Mgmt Unit (MMU):** Maps address space onto physical memory and 2ndary | Page faults if not in memory
  * **Page Table:** Mappings of virtual to physical addresses | **_Conversions_** 1 KB = 2$^{10}$ bytes | 1 MB = 2$^{20}$ bytes
     * **_Uniqueness_** *Virtual addresses* are unique to accessing process | *Physical addresses* are unique to hardware
     * **_Page Size_** e.g. Given 32-bit space, 8KB pages, 4 bytes/entry: 2$^{32}$(addresses)/2$^{13}$(pages) = 2$^{19}$ entries * 2$^2$(entry) = 2$^{21}$ bytes
@@ -56,8 +55,7 @@
     * **_Optimal_** Evict page used furthest in the future
  * **Page Frame Allocation: Global:** All processes complete for pages | **Local** Equal or Proportional allocation
     * **_Thrasing_** A program causing page faults every few instructions
-    * **_Working Set of a Process_** Reduces thrashing | Set of referenced pages in the last k memory references
-    * *e.g.* Find k-references at $t = 6$ with $k = 3$ | t: 0 1 2 3 4 5 6 7 8 9 and page #: 1 1 2 2 1 3 1 1 4 5 | $w(3, 6) = \{1,3\} |w(3,6)| = 2$
+    * **_Working Set of a Process_** Reduces thrashing | Set of referenced pages in the last k memory references| |w(k,t)|, t is start time, count last k references including at t
  * **Files: Permissions:** rwx(**user**)rwx(**groups**)rwx(**others**)
     * **_Opening_** Ret file descrip**_Reading_** Ret # bytes read | **_Writing_** Ret # of bytes written | **_Seeking_** Ret new file pointer
     * **_whence_** *offset* (SEEK_SET), *current + offset* (SEEK_CUR), *size of file* (SEEK_END) 
@@ -75,7 +73,7 @@
     * **_Exceptional Cases_** Write to cache, do a synchronous (blocking) write to disk, and return
     * **_Replacement Algos_** LRU | Sorted listed by time of use
  * **Disk Scheduling:** **_Goals:_** Trade-off between throughput and response time
-    * **_FCFS_** **Pro:** Quick response time | **Cons:** No regard for throughput and head may move almost randomly across disk surface
+    * **_FCFS_** **Pro:** Quick response time | **Cons:** No regard for throughput, head may move almost randomly across disk surface
     * **_SSTF_** Closest to current head position | **Pro:** Minimized head movement time | **Con:** Starvation of far reads
     * **_SCAN_** Sweep from outer to inner and back | Selects those in path | Lower movement time than FCFS | Fairer than SSTF
     * **_LOOK_** SCAN but will change direction if no waiting requests beyond current cylinder

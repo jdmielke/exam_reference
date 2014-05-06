@@ -88,7 +88,6 @@ OS Level Code: POSIX mutexes, conditional waits, etc. Basic chmod, read, write, 
     * **_SCAN_** Sweep from outer to inner and back | Selects those that are in path | Lower movement time that FCFS | Fairer than SSTF
     * **_LOOK_** SCAN but will change direction if no waiting requests beyond current cylinder
     * **_C-SCAN_** SCAN but from innter to outer and back to inner without satisfying any requests
-    * **_Page Replacement e.g._** Which page will be replaced by: a) NRU = 2b) FIFO = 3 c) LRU = 1 d) 2nd Chance = 2 Given:
 
 ----------------------------------------------------------------------------------------------------------------------
 From here on is the list of topics in the class (from BB).  Add new content above the line so that this text doesn't take space in case we forget to delete it :)
